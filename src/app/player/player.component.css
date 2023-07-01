@@ -1,0 +1,59 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertikal zentrieren */
+  flex-direction: column;
+  margin-top: 120pt;
+}
+
+.container > * {
+  margin-bottom: 10pt; /* Margin zwischen den Elementen */
+}
+
+.sub_container {
+  flex-direction: row;
+  display: flex;
+}
+
+.sub_container > * {
+  /*margin: 10pt; /* Margin zwischen den Elementen */
+}
+
+.circle {
+  width: 50pt;
+  height: 50pt;
+  border-radius: 50%;
+}
+
+#red {
+  background-color: red;
+  /*margin-right: 120pt;*/
+  margin-left: 15pt;
+  margin-right: 15pt;
+}
+
+#blue {
+  background-color: blue;
+  /*margin-left: 120pt;*/
+  margin-right: 15pt;
+  margin-left: 15pt;
+}
+
+a {
+  text-decoration: none;
+}
+
+.input {
+  font-family: Phantomsans, sans-serif;
+  font-size: 18pt;
+  background-color: black;
+  color: white;
+  width: 100pt;
+  height: 40pt;
+  border-color: rgb(0, 0, 0);
+}
+
+.input:focus {
+  border-color: white;
+  outline: none;
+}

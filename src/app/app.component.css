@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  justify-content: center; /* Horizontal zentrieren */
+  align-items: center; /* Vertikal zentrieren */
+}
+
+.title {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, cursive;
+  font-size: 38pt;
+  text-align: center;
+  justify-content: center;
+  color: white;
+  letter-spacing: 15pt;
+  text-decoration: none;
+  margin-top: 20pt;
+}
