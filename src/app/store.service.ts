@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class StoreService {
   public player_red: String = '';
   public player_blue: String = '';
+  public isAI: boolean = false;
 
   constructor() {}
 }
