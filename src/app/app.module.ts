@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
-  declarations: [AppComponent, PlayerComponent, MenuComponent],
+  declarations: [AppComponent, PlayerComponent, MenuComponent, GameComponent],
   imports: [BrowserModule, AppRoutingModule, RouterModule],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,36 +1,36 @@
 <div class="container">
   <div class="sub_container">
     <div *ngIf="one_switch">
-      <input #in_p_one_red class="input" type="text" value="{{ player_one }}" />
+      <input #in_p_one_red class="input" type="text" value="{{ player_red }}" />
     </div>
     <div class="circle" id="red"></div>
     <div *ngIf="two_switch">
-      <input #in_p_two_red class="input" type="text" value="{{ player_two }}" />
+      <input #in_p_two_red class="input" type="text" value="{{ player_red }}" />
     </div>
   </div>
   <div class="sub_container">
     <div *ngIf="two_switch">
       <input
-        #in_p_one_blue
+        #in_p_two_blue
         class="input"
         type="text"
-        value="{{ player_one }}"
+        value="{{ player_blue }}"
       />
     </div>
     <div class="circle" id="blue"></div>
     <div *ngIf="one_switch">
       <input
-        #in_p_two_blue
+        #in_p_one_blue
         class="input"
         type="text"
-        value="{{ player_two }}"
+        value="{{ player_blue }}"
       />
     </div>
   </div>
   <button class="button-64" role="button" (click)="switch()">
     <span class="text"> Switch </span>
   </button>
-  <a routerLink="/game" routerLinkActive="active">
+  <a routerLink="/game" routerLinkActive="active" (click)="start()">
     <button class="button-64" role="button">
       <span class="text"> Start </span>
     </button>

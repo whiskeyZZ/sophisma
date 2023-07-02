@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="container_player">
+    <p class="player" id="player_red">
+      {{ player_red }}&nbsp;&nbsp;&nbsp;{{ points_red }}
+    </p>
+    <p class="player" id="player_blue">
+      {{ points_blue }}&nbsp;&nbsp;&nbsp;{{ player_blue }}
+    </p>
+  </div>
+  <div class="container_border">
+    <div class="border_top" id="border_top_red"></div>
+    <div class="border_top" id="border_top_blue"></div>
+  </div>
+  <div class="container_column" *ngFor="let column of board; index as i">
+    <div class="border" id="border_blue" *ngIf="i == 0"></div>
+    <div class="border" id="border_red" *ngIf="i == 4"></div>
+    <div class="container_row" *ngFor="let row of column; index as y">
+      <div
+        class="field"
+        *ngIf="board[i][y].piece == 'empty'"
+        (click)="move(i, y)"
+      ></div>
+      <div
+        class="piece"
+        id="piece_red"
+        *ngIf="board[i][y].piece == 'red'"
+      ></div>
+      <div
+        class="piece"
+        id="piece_blue"
+        *ngIf="board[i][y].piece == 'blue'"
+      ></div>
+    </div>
+    <div class="border" id="border_blue" *ngIf="i == 4"></div>
+    <div class="border" id="border_red" *ngIf="i == 0"></div>
+  </div>
+  <div class="container_border">
+    <div class="border_top" id="border_bottom_blue"></div>
+    <div class="border_top" id="border_bottom_red"></div>
+  </div>
+</div>

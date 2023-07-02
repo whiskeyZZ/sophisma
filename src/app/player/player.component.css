@@ -1,22 +1,18 @@
 .container {
   display: flex;
   justify-content: center;
-  align-items: center; /* Vertikal zentrieren */
+  align-items: center;
   flex-direction: column;
   margin-top: 120pt;
 }
 
 .container > * {
-  margin-bottom: 10pt; /* Margin zwischen den Elementen */
+  margin-bottom: 10pt;
 }
 
 .sub_container {
   flex-direction: row;
   display: flex;
-}
-
-.sub_container > * {
-  /*margin: 10pt; /* Margin zwischen den Elementen */
 }
 
 .circle {
@@ -27,14 +23,12 @@
 
 #red {
   background-color: red;
-  /*margin-right: 120pt;*/
   margin-left: 15pt;
   margin-right: 15pt;
 }
 
 #blue {
   background-color: blue;
-  /*margin-left: 120pt;*/
   margin-right: 15pt;
   margin-left: 15pt;
 }

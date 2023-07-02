@@ -1,0 +1,99 @@
+.field {
+  width: 30pt;
+  height: 30pt;
+  border-radius: 50%;
+  background-color: white;
+  margin: 36pt;
+  box-shadow: 0 0 60px 15pt #fff;
+}
+
+.piece {
+  width: 40pt;
+  height: 40pt;
+  margin: 31pt;
+  transform: rotate(45deg);
+}
+
+#piece_red {
+  background-color: red;
+}
+
+#piece_blue {
+  background-color: blue;
+}
+
+.border {
+  width: 60pt;
+  height: 20pt;
+  border-radius: 50%;
+  transform: rotate(90deg);
+  margin-top: 45pt;
+}
+
+.border_top {
+  width: 60pt;
+  height: 20pt;
+  border-radius: 50%;
+}
+
+#border_blue {
+  background-color: blue;
+}
+
+#border_red {
+  background-color: red;
+}
+
+#border_top_red {
+  background-color: red;
+  margin-left: 485pt;
+}
+
+#border_top_blue {
+  background-color: blue;
+  margin-right: 485pt;
+}
+
+#border_bottom_red {
+  background-color: red;
+  margin-right: 485pt;
+}
+
+#border_bottom_blue {
+  background-color: blue;
+  margin-left: 485pt;
+}
+
+.container_column {
+  display: flex;
+  justify-content: center;
+}
+
+.container_row {
+  display: flex;
+}
+
+.container_player {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container_border {
+  display: flex;
+  justify-content: space-between;
+}
+
+.player {
+  font-size: 30pt;
+  margin-top: 0pt;
+}
+
+#player_red {
+  color: red;
+  margin-left: 150pt;
+}
+
+#player_blue {
+  color: blue;
+  margin-right: 150pt;
+}
