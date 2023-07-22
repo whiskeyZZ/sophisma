@@ -24,12 +24,14 @@
         class="piece"
         id="piece_red"
         [style.opacity]="board[i][y].captured ? '0.5' : '1'"
+        [style.transform]="board[i][y].turned ? 'rotate(0deg)' : ''"
         *ngIf="board[i][y].piece == 'red'"
       ></div>
       <div
         class="piece"
         id="piece_blue"
         [style.opacity]="board[i][y].captured ? '0.5' : '1'"
+        [style.transform]="board[i][y].turned ? 'rotate(0deg)' : ''"
         *ngIf="board[i][y].piece == 'blue'"
       ></div>
     </div>

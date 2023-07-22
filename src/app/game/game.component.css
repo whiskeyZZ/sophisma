@@ -14,6 +14,13 @@
   transform: rotate(45deg);
 }
 
+.piece_turned {
+  width: 40pt;
+  height: 40pt;
+  margin: 31pt;
+  transform: rotate(45deg);
+}
+
 #piece_red {
   background-color: red;
 }
@@ -96,4 +103,8 @@
 #player_blue {
   color: blue;
   margin-right: 150pt;
+}
+
+.rotate {
+  transform: rotate(45deg);
 }

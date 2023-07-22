@@ -1,0 +1,21 @@
+.bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: black;
+}
+
+h1 {
+  padding: 20pt;
+  font-size: 50pt;
+  text-align: center;
+  display: block;
+}
+
+h2 {
+  padding: 40pt;
+  font-size: 100pt;
+  text-align: center;
+  display: block;
+}

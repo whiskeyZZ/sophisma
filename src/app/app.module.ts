@@ -7,10 +7,25 @@ import { PlayerComponent } from './player/player.component';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { GameComponent } from './game/game.component';
+import { EndscreenComponent } from './endscreen/endscreen.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [AppComponent, PlayerComponent, MenuComponent, GameComponent],
-  imports: [BrowserModule, AppRoutingModule, RouterModule],
+  declarations: [
+    AppComponent,
+    PlayerComponent,
+    MenuComponent,
+    GameComponent,
+    EndscreenComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

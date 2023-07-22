@@ -20,6 +20,14 @@ export class PlayerComponent {
 
   constructor(private service: StoreService) {}
 
+  ngOnInit() {
+    if (this.service.isAI) {
+      this.player_red = 'You';
+      this.player_blue = 'AI';
+      this.service.aiPlayer = 'blue';
+    }
+  }
+
   switch() {
     if (this.one_switch && !this.two_switch) {
       this.one_switch = false;
@@ -27,12 +35,18 @@ export class PlayerComponent {
       this.player_red = this.in_p_one_blue.nativeElement.value;
       this.player_blue = this.in_p_one_red.nativeElement.value;
       this.switched = true;
+      if (this.service.isAI) {
+        this.service.aiPlayer = 'red';
+      }
     } else {
       this.one_switch = true;
       this.two_switch = false;
       this.player_red = this.in_p_two_blue.nativeElement.value;
       this.player_blue = this.in_p_two_red.nativeElement.value;
       this.switched = false;
+      if (this.service.isAI) {
+        this.service.aiPlayer = 'blue';
+      }
     }
   }
 

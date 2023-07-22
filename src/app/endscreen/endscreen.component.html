@@ -1,0 +1,11 @@
+<div class="bg">
+  <h1 [style.color]="red_win ? 'red' : 'blue'">
+    {{ winner }}
+  </h1>
+  <h2 [style.color]="red_win ? 'red' : 'blue'">Wins!</h2>
+  <a routerLink="/">
+    <button class="button-64" role="button" (click)="closeDialog()">
+      <span class="text"> Home </span>
+    </button>
+  </a>
+</div>
