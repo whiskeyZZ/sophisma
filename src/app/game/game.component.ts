@@ -42,20 +42,20 @@ export class GameComponent {
   move(i: number, y: number) {
     if (this.current_player == 'red') {
       this.board[i][y].setPiece('red');
-      this.searchCaptured(i, y, false);
+      this.searchCaptured(i, y, false, false);
       this.moves += 1;
       this.calcPoints();
       this.current_player = 'blue';
     } else {
       this.board[i][y].setPiece('blue');
-      this.searchCaptured(i, y, false);
+      this.searchCaptured(i, y, false, false);
       this.moves += 1;
       this.calcPoints();
       this.current_player = 'red';
     }
   }
 
-  searchCaptured(i: number, y: number, freeMode: boolean) {
+  searchCaptured(i: number, y: number, freeMode: boolean, second: boolean) {
     let player: String = this.current_player;
     if (freeMode) {
       if (this.current_player == 'red') {
@@ -133,9 +133,19 @@ export class GameComponent {
         }
       }
     }
-    if (freeMode == false) {
-      this.searchTurned();
+    if (freeMode == false && second == false) {
       this.searchForFree();
+      for (let i = 0; i <= 4; i++) {
+        for (let x = 0; x <= 4; x++) {
+          if (
+            this.board[i][x].piece == this.current_player &&
+            this.board[i][x].captured == false
+          ) {
+            this.searchCaptured(i, x, false, true);
+          }
+        }
+      }
+      this.searchTurned();
     }
   }
 
@@ -154,6 +164,7 @@ export class GameComponent {
               x == 0
             ) {
               turn_count += 1;
+              break;
             }
           }
           for (let c = x; c <= 4; c++) {
@@ -163,6 +174,7 @@ export class GameComponent {
               x == 4
             ) {
               turn_count += 1;
+              break;
             }
           }
           for (let c = i; c >= 0; c--) {
@@ -172,6 +184,7 @@ export class GameComponent {
               i == 0
             ) {
               turn_count += 1;
+              break;
             }
           }
           for (let c = i; c <= 4; c++) {
@@ -181,13 +194,13 @@ export class GameComponent {
               i == 4
             ) {
               turn_count += 1;
+              break;
             }
           }
           if (turn_count == 4) {
             this.board[i][x].setTurned(true);
             console.log(this.board[i][x]);
           }
-          console.log(turn_count);
         }
       }
     }
@@ -208,7 +221,7 @@ export class GameComponent {
           this.board[i][x].piece != 'empty' &&
           this.board[i][x].captured == false
         ) {
-          this.searchCaptured(i, x, true);
+          this.searchCaptured(i, x, true, false);
         }
       }
     }

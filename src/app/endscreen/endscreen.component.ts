@@ -20,7 +20,7 @@ export class EndscreenComponent {
   ngOnInit() {
     this.winner = this.service.winner;
     this.win_color = this.service.win_color;
-    if ((this.win_color = 'blue')) {
+    if (this.win_color == 'blue') {
       this.red_win = false;
     }
   }
