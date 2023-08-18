@@ -3,6 +3,7 @@ import { StoreService } from '../store.service';
 import { Field } from './field';
 import { EndscreenComponent } from '../endscreen/endscreen.component';
 import { MatDialog } from '@angular/material/dialog';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-game',
@@ -13,19 +14,32 @@ export class GameComponent {
   player_red: String = '';
   player_blue: String = '';
   board: Field[][] = [];
+  aiBoard: Field[][] = [];
   points_red: number = 0;
   points_blue: number = 0;
+  aiPoints_red: number = 0;
+  aiPoints_blue: number = 0;
+  aiPoints_full: number = 0;
+  aiPoints_component_full = 0;
+  difference: number = -100;
   current_player: String = 'red';
-  isAI: boolean = false;
+  isAIGame: boolean = false;
+  isAIMove: boolean = false;
+  startAIMove: boolean = true;
   aiPlayer: String = '';
   moves: number = 0;
+  possibleAIMoves: number[][] = [];
+  i_ai_position: number = 0;
+  x_ai_position: number = 0;
+  ai_index: number = 0;
+  recursion_index: number = 0;
 
   constructor(private service: StoreService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.player_red = this.service.player_red;
     this.player_blue = this.service.player_blue;
-    this.isAI = this.service.isAI;
+    this.isAIGame = this.service.isAI;
     this.aiPlayer = this.service.aiPlayer;
 
     for (let i = 0; i <= 4; i++) {
@@ -52,6 +66,10 @@ export class GameComponent {
       this.moves += 1;
       this.calcPoints();
       this.current_player = 'red';
+    }
+
+    if (this.isAIGame) {
+      this.setAIMove();
     }
   }
 
@@ -199,7 +217,6 @@ export class GameComponent {
           }
           if (turn_count == 4) {
             this.board[i][x].setTurned(true);
-            console.log(this.board[i][x]);
           }
         }
       }
@@ -230,6 +247,8 @@ export class GameComponent {
   calcPoints() {
     this.points_blue = 0;
     this.points_red = 0;
+    this.aiPoints_blue = 0;
+    this.aiPoints_red = 0;
     for (let i = 0; i <= 4; i++) {
       for (let x = 0; x <= 4; x++) {
         if (this.board[i][x].piece == 'red') {
@@ -263,6 +282,127 @@ export class GameComponent {
       this.service.red_points = this.points_red;
       this.service.blue_points = this.points_blue;
       let endScreen = this.dialog.open(EndscreenComponent, {});
+    }
+  }
+
+  setAIMove() {
+    this.aiBoard = _.cloneDeep(this.board);
+    this.possibleAIMoves = [];
+    this.aiPoints_full = -100;
+    this.aiPoints_component_full = -100;
+    this.isAIMove = true;
+    this.startAIMove = false;
+    this.bestAIMove(0);
+    this.bestAIMove(1);
+    this.bestAIMove(2);
+    this.isAIMove = false;
+    let random = Math.floor(Math.random() * this.possibleAIMoves.length);
+    console.log(this.possibleAIMoves);
+    this.move(this.possibleAIMoves[random][0], this.possibleAIMoves[random][1]);
+  }
+  //fix it
+  bestAIMove(aiIndex: number) {
+    for (let i = 0; i <= 4; i++) {
+      for (let x = 0; x <= 4; x++) {
+        if (this.ai_index == 0) {
+          this.i_ai_position = i;
+          this.x_ai_position = x;
+          this.aiBoard = _.cloneDeep(this.board);
+        }
+        if (this.aiBoard[i][x].piece == 'empty') {
+          this.move(i, x);
+          if (
+            this.aiPlayer == 'red' &&
+            this.current_player == 'red' &&
+            aiIndex == 2
+          ) {
+            if (this.aiPoints_red - this.aiPoints_blue > this.aiPoints_full) {
+              this.aiPoints_full = this.aiPoints_red - this.aiPoints_blue;
+              if (
+                this.aiPoints_full - this.aiPoints_component_full >
+                this.difference
+              ) {
+                this.difference =
+                  this.aiPoints_full - this.aiPoints_component_full;
+                this.possibleAIMoves = [];
+                this.possibleAIMoves.push([
+                  this.i_ai_position,
+                  this.x_ai_position,
+                ]);
+              }
+              if (
+                this.aiPoints_full - this.aiPoints_component_full ==
+                this.difference
+              ) {
+                this.possibleAIMoves.push([
+                  this.i_ai_position,
+                  this.x_ai_position,
+                ]);
+              }
+            }
+          }
+          if (this.aiPlayer == 'red' && this.current_player == 'blue') {
+            if (
+              this.aiPoints_blue - this.aiPoints_red >
+              this.aiPoints_component_full
+            ) {
+              this.aiPoints_component_full =
+                this.aiPoints_blue - this.aiPoints_red;
+            }
+          }
+          if (
+            this.aiPlayer == 'blue' &&
+            this.current_player == 'blue' &&
+            aiIndex == 2
+          ) {
+            console.log('test');
+            if (this.aiPoints_blue - this.aiPoints_red > this.aiPoints_full) {
+              this.aiPoints_full = this.aiPoints_blue - this.aiPoints_red;
+              if (
+                this.aiPoints_full - this.aiPoints_component_full >
+                this.difference
+              ) {
+                this.difference =
+                  this.aiPoints_full - this.aiPoints_component_full;
+                this.possibleAIMoves = [];
+                this.possibleAIMoves.push([
+                  this.i_ai_position,
+                  this.x_ai_position,
+                ]);
+              }
+              if (
+                this.aiPoints_full - this.aiPoints_component_full ==
+                this.difference
+              ) {
+                this.possibleAIMoves.push([
+                  this.i_ai_position,
+                  this.x_ai_position,
+                ]);
+              }
+            }
+          }
+          if (this.aiPlayer == 'blue' && this.current_player == 'red') {
+            if (
+              this.aiPoints_red - this.aiPoints_blue >
+              this.aiPoints_component_full
+            ) {
+              this.aiPoints_component_full =
+                this.aiPoints_red - this.aiPoints_blue;
+            }
+          }
+        }
+
+        //if (this.recursion_index <= 2) {
+        if (this.current_player == 'red') {
+          this.current_player = 'blue';
+        } else {
+          this.current_player = 'red';
+        }
+        //this.bestAIMove();
+        //} else {
+        //this.ai_index = 0;
+        //}
+      }
     }
   }
 }
